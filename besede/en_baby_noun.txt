@@ -1,11 +1,8 @@
 19-year-old
 1D stan
-Cocomelon fan
-Karen
-Krabby Patty
-Twilight fan
 baboon
 bacterial water
+baguette
 bottle of Ketchup
 breadcrumb
 bucket hat
@@ -13,6 +10,7 @@ casual
 celery stick
 chromosome
 cigarette butt
+Cocomelon fan
 commoner
 cracker
 croissant
@@ -23,6 +21,8 @@ garlic clove
 goblin
 gringo
 infant
+Karen
+Krabby Patty
 lasagna
 left toe
 llama
@@ -40,11 +40,13 @@ sandwich
 shovel
 skort
 sock
+speedrunner
 splinter
 stinker
 tiktoker
 toothpick
 tween
+Twilight fan
 waffle
 weasel
 wedgie
