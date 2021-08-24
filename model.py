@@ -65,9 +65,9 @@ class Insult:
         self.favourited = not self.favourited
 
     @staticmethod
-    def generate(language, difficulty):
-        noun = random.choice([x for x in Noun.nouns if language == x.language and difficulty == x.difficulty])
-        adjective = random.choice([x for x in Adjective.adjectives if language == x.language and difficulty == x.difficulty and x.gender == noun.gender])
+    def generate(language, difficulty, gender):
+        noun = random.choice([x for x in Noun.nouns if language == x.language and difficulty == x.difficulty and gender == x.gender])
+        adjective = random.choice([x for x in Adjective.adjectives if language == x.language and difficulty == x.difficulty and gender == x.gender and gender == noun.gender])
         return Insult(adjective, noun)
 
 if __name__ == "__main__":
@@ -75,4 +75,8 @@ if __name__ == "__main__":
     while True:
         lan = input("Enter a language: ")
         diff = input("Pick a difficulty (baby/hardcore): ")
-        print(Insult.generate(lan, diff))
+        if lan == "si":
+            gen = input("Pick a gender (f/m/t): ")
+            print(Insult.generate(lan, diff, gen))
+        if lan == "en":
+            print(Insult.generate(lan, diff, "x"))
