@@ -1,10 +1,11 @@
 import bottle
 import model
 
-bottle.TEMPLATE_PATH.insert(0, 'views')
+# bottle.TEMPLATE_PATH.insert(0, 'views')
 
 @bottle.get('/')
 def osnovna_stran():
+    bottle.TEMPLATE_PATH.insert(0, 'views')
     return bottle.template('osnovna_stran.tpl')
 
 bottle.run(reloader=True, debug=True)
