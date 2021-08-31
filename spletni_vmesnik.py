@@ -24,7 +24,7 @@ def choose_difficulty():
     any = bottle.request.POST.get("any")
     play_god = bottle.request.POST.get("play_god")
     if baby is not None:
-        return bottle.redirect("/baby_mode")
+        return bottle.redirect("/baby-mode")
     if mean is not None:
         return bottle.redirect("/hardcore-survival")
     if any is not None:
@@ -34,21 +34,33 @@ def choose_difficulty():
     return bottle.template('choose_difficulty.html')
 
 
-@bottle.get("/baby_mode")
+@bottle.get("/baby-mode")
+@bottle.post("/baby-mode")
 def baby_mode():
     insult = Insult.generate("en", "baby", "x")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/baby-mode")
     return bottle.template("baby_mode.html", insult = insult)
 
 @bottle.get("/hardcore-survival")
+@bottle.post("/hardcore-survival")
 def hardcore_survival():
     insult = Insult.generate("en", "hardcore", "x")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/hardcore-survival")
     return bottle.template("hardcore_survival.html", insult = insult)
 
 @bottle.get("/random")
+@bottle.post("/random")
 def no_preference():
     difficulties = ["baby", "hardcore"]
     diff = random.choice(difficulties)
     insult = Insult.generate("en", diff, "x")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/random")
     return bottle.template("random.html", insult = insult)
 
 @bottle.get("/play-god")
@@ -68,8 +80,12 @@ def play_god():
     return bottle.template("play-god.html", Adjective = Adjective, Noun = Noun)
 
 @bottle.get("/show-insult")
+@bottle.post("/show-insult")
 def show_insult():
     insult = Insult.generate("en", "custom", "x")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/show-insult")
     return bottle.template("play-god-2.html", insult = insult)
 
 @bottle.get("/si")
@@ -107,25 +123,41 @@ def otrocje_nezaljiva():
     return bottle.template("nezaljiva_izbira_spola.html")
 
 @bottle.get("/nezaljiva-f")
+@bottle.post("/nezaljiva-f")
 def nezaljiva_f():
     insult = Insult.generate("si", "baby", "f")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/nezaljiva-f")
     return bottle.template("nezaljiva-f.html", insult = insult)
 
 @bottle.get("/nezaljiva-m")
+@bottle.post("/nezaljiva-m")
 def nezaljiva_m():
     insult = Insult.generate("si", "baby", "m")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/nezaljiva-m")
     return bottle.template("nezaljiva-m.html", insult = insult)
 
 @bottle.get("/nezaljiva-t")
+@bottle.post("/nezaljiva-t")
 def nezaljiva_t():
     insult = Insult.generate("si", "baby", "t")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/nezaljiva-t")
     return bottle.template("nezaljiva-t.html", insult = insult)
 
 @bottle.get("/nezaljiva-fmt")
+@bottle.post("/nezaljiva-fmt")
 def nezaljiva_fmt():
     genders = ["f", "m", "t"]
     y = random.choice(genders)
     insult = Insult.generate("si", "baby", y)
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/nezaljiva-fmt")
     return bottle.template("nezaljiva-fmt.html", insult = insult)
 
 @bottle.get("/oporecna")
@@ -146,25 +178,41 @@ def moralno_oporecna():
     return bottle.template("oporecna_izbira_spola.html")
 
 @bottle.get("/oporecna-f")
+@bottle.post("/oporecna-f")
 def oporecna_f():
     insult = Insult.generate("si", "hardcore", "f")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/oporecna-f")
     return bottle.template("oporecna-f.html", insult = insult)
 
 @bottle.get("/oporecna-m")
+@bottle.post("/oporecna-m")
 def oporecna_m():
     insult = Insult.generate("si", "hardcore", "m")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/oporecna-m")
     return bottle.template("oporecna-m.html", insult = insult)
 
 @bottle.get("/oporecna-t")
+@bottle.post("/oporecna-t")
 def oporecna_t():
     insult = Insult.generate("si", "hardcore", "t")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/oporecna-t")
     return bottle.template("oporecna-t.html", insult = insult)
 
 @bottle.get("/oporecna-fmt")
+@bottle.post("/oporecna-fmt")
 def oporecna_fmt():
     genders = ["f", "m", "t"]
     y = random.choice(genders)
     insult = Insult.generate("si", "hardcore", y)
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/oporecna-fmt")
     return bottle.template("oporecna-fmt.html", insult = insult)
 
 
@@ -186,33 +234,49 @@ def vseeno():
     return bottle.template("vseeno_izbira_spola.html")
 
 @bottle.get("/vseeno-f")
+@bottle.post("/vseeno-f")
 def vseeno_f():
     difficulties = ["baby", "hardcore"]
     diff = random.choice(difficulties)
     insult = Insult.generate("si", diff, "f")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/vseeno-f")
     return bottle.template("vseeno-f.html", insult = insult)
 
 @bottle.get("/vseeno-m")
+@bottle.post("/vseeno-m")
 def vseeno_m():
     difficulties = ["baby", "hardcore"]
     diff = random.choice(difficulties)
     insult = Insult.generate("si", diff, "m")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/vseeno-m")
     return bottle.template("vseeno-m.html", insult = insult)
 
 @bottle.get("/vseeno-t")
+@bottle.post("/vseeno-t")
 def vseeno_t():
     difficulties = ["baby", "hardcore"]
     diff = random.choice(difficulties)
     insult = Insult.generate("si", diff, "t")
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/vseeno-t")
     return bottle.template("vseeno-t.html", insult = insult)
 
 @bottle.get("/vseeno-fmt")
+@bottle.post("/vseeno-fmt")
 def vseeno_fmt():
     difficulties = ["baby", "hardcore"]
     diff = random.choice(difficulties)
     genders = ["f", "m", "t"]
     y = random.choice(genders)
     insult = Insult.generate("si", diff, y)
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/vseeno-fmt")
     return bottle.template("vseeno-fmt.html", insult = insult)
 
 @bottle.get("/samostojno")
