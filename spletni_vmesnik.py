@@ -220,9 +220,40 @@ def vseeno_fmt():
 def samostojno():
     samostalniki = bottle.request.POST.getunicode("samostalnik")
     pridevniki = bottle.request.POST.getunicode("pridevnik")
-    spoli = bottle.request.POST.getunicode("spol")
-    insult = Insult.generate("en", "?????", "x")
-    return bottle.template("samostojno.html", insult = insult)
+    f = bottle.request.POST.get("ž")
+    m = bottle.request.POST.get("m")
+    t = bottle.request.POST.get("s")
+    generiraj = bottle.request.POST.get("generiraj")
+    if samostalniki is not None:
+        if f is not None:
+            for samost in samostalniki.split():
+                Noun(samost, "si", "custom", "f")
+        if m is not None:
+            for samost in samostalniki.split():
+                Noun(samost, "si", "custom", "m")
+        if t is not None:
+            for samost in samostalniki.split():
+                Noun(samost, "si", "custom", "t")
+    if pridevniki is not None:
+        if f is not None:
+            for prid in pridevniki.split():
+                Adjective(prid, "si", "custom", "f")
+        if m is not None:
+            for prid in pridevniki.split():
+                Adjective(prid, "si", "custom", "m")
+        if t is not None:
+            for prid in pridevniki.split():
+                Adjective(prid, "si", "custom", "t")
+    if generiraj is not None:
+        return bottle.redirect("/prikazi-insult")
+    return bottle.template("samostojno.html", Adjective = Adjective, Noun = Noun)
+
+@bottle.get("/prikazi-insult")
+def prikazi_insult():
+    genders = ["f", "m", "t"]
+    y = random.choice(genders)
+    insult = Insult.generate("si", "custom", y)
+    return bottle.template("samostojno2.html", insult = insult)
 
 Word.parse()
 bottle.run(reloader=True, debug=True)

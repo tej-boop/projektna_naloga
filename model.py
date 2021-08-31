@@ -1,6 +1,5 @@
 import random
 import glob
-import os
 
 class Word:
     def __init__(self, text, language, difficulty, gender):
@@ -33,21 +32,23 @@ class Word:
     def parse():
         for file in glob.glob("projektna_naloga/besede/*.txt"):
             Word.load_from_file(file)
-#             print(file)
+            #print(file)
 
 class Noun(Word):
     nouns = []
 
     def __init__(self, *args):
         Word.__init__(self, *args)
-        self.nouns.append(self)
+        if not any([self.text == other.text and self.difficulty == other.difficulty for other in self.nouns]):
+            self.nouns.append(self)
     
 class Adjective(Word):
     adjectives = []
 
     def __init__(self, *args):
         Word.__init__(self, *args)
-        self.adjectives.append(self)
+        if not any([self.text == other.text and self.difficulty == other.difficulty for other in self.adjectives]):
+            self.adjectives.append(self)
 
 class Insult:
     def __init__(self, adjective, noun):

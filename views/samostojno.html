@@ -2,18 +2,37 @@
 
     <body>
 
-        <form>
+        <form action="/samostojno" method="POST">
 
-            samostalniki: <input type="text" name="samostalnik">          
+            samostalniki: <input type="text" name="samostalnik">
             pridevniki: <input type="text" name="pridevnik">
             spol:
-            <input type="radio" name="spol" value="ž"> <label for="ž">ž</label><br>
-            <input type="radio" name="spol" value="m"> <label for="m">m</label><br>
-            <input type="radio" name="spol" value="s"> <label for="s">s</label><br>
+            <input type="radio" name="spol" value="ž"> <label for="ž">ž</label>
+            <input type="radio" name="spol" value="m"> <label for="m">m</label>
+            <input type="radio" name="spol" value="s"> <label for="s">s</label>
 
             <input type="submit" value="dodaj!">
+            <input type="submit" name="generiraj" value="generiraj">
 
         </form>
+
+        <h2>Samostalniki:</h2>
+        <ul>
+            % for samostalnik in Noun.nouns:
+                % if samostalnik.difficulty == "custom" and samostalnik.language == "si":
+                <li>{{samostalnik}}</li>
+                % end
+            % end
+        </ul>
+        
+        <h2>Pridevniki:</h2>
+        <ul>
+            % for pridevnik in Adjective.adjectives:
+                % if pridevnik.difficulty == "custom" and pridevnik.language == "si":
+                <li>{{pridevnik}}</li>
+                % end
+            % end
+        </ul>
 
     </body>
 

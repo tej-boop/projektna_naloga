@@ -14,7 +14,7 @@
         <h2>Adjectives:</h2>
         <ul>
             % for adjective in Adjective.adjectives:
-                % if adjective.difficulty == "custom":
+                % if adjective.difficulty == "custom" and adjective.language == "en":
                 <li>{{adjective}}</li>
                 % end
             % end
@@ -23,7 +23,7 @@
         <h2>Nouns:</h2>
         <ul>
             % for noun in Noun.nouns:
-                % if noun.difficulty == "custom":
+                % if noun.difficulty == "custom" and noun.language == "en":
                 <li>{{noun}}</li>
                 % end
             % end
