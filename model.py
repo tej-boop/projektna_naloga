@@ -67,9 +67,16 @@ class Insult:
 
     @staticmethod
     def generate(language, difficulty, gender):
-        noun = random.choice([x for x in Noun.nouns if language == x.language and difficulty == x.difficulty and gender == x.gender])
-        adjective = random.choice([x for x in Adjective.adjectives if language == x.language and difficulty == x.difficulty and gender == x.gender and gender == noun.gender])
-        return Insult(adjective, noun)
+        long_noun_list = [x for x in Noun.nouns if language == x.language and difficulty == x.difficulty and gender == x.gender]
+        if len(long_noun_list) != 0:
+            noun = random.choice(long_noun_list)
+            long_adjective_list = [x for x in Adjective.adjectives if language == x.language and difficulty == x.difficulty and gender == x.gender and gender == noun.gender]
+            if len(long_adjective_list) != 0:
+                adjective = random.choice(long_adjective_list)
+            return Insult(adjective, noun)
+        elif len(long_noun_list) == 0:
+            gender = random.choice(["f", "m", "t"])
+            return Insult.generate(language, difficulty, gender)
 
 if __name__ == "__main__":
     Word.parse()

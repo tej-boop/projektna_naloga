@@ -284,39 +284,29 @@ def vseeno_fmt():
 def samostojno():
     samostalniki = bottle.request.POST.getunicode("samostalnik")
     pridevniki = bottle.request.POST.getunicode("pridevnik")
-    f = bottle.request.POST.get("ž")
-    m = bottle.request.POST.get("m")
-    t = bottle.request.POST.get("s")
+    gender = bottle.request.POST.get("spol")
     generiraj = bottle.request.POST.get("generiraj")
     if samostalniki is not None:
-        if f is not None:
+        if gender is not None:
             for samost in samostalniki.split():
-                Noun(samost, "si", "custom", "f")
-        if m is not None:
-            for samost in samostalniki.split():
-                Noun(samost, "si", "custom", "m")
-        if t is not None:
-            for samost in samostalniki.split():
-                Noun(samost, "si", "custom", "t")
+                Noun(samost, "si", "custom", gender)
     if pridevniki is not None:
-        if f is not None:
+        if gender is not None:
             for prid in pridevniki.split():
-                Adjective(prid, "si", "custom", "f")
-        if m is not None:
-            for prid in pridevniki.split():
-                Adjective(prid, "si", "custom", "m")
-        if t is not None:
-            for prid in pridevniki.split():
-                Adjective(prid, "si", "custom", "t")
+                Adjective(prid, "si", "custom", gender)
     if generiraj is not None:
         return bottle.redirect("/prikazi-insult")
     return bottle.template("samostojno.html", Adjective = Adjective, Noun = Noun)
 
 @bottle.get("/prikazi-insult")
+@bottle.post("/prikazi-insult")
 def prikazi_insult():
     genders = ["f", "m", "t"]
-    y = random.choice(genders)
-    insult = Insult.generate("si", "custom", y)
+    gender = random.choice(genders)
+    insult = Insult.generate("si", "custom", gender)
+    refresh = bottle.request.POST.get("refresh")
+    if refresh is not None:
+        return bottle.redirect("/prikazi-insult")
     return bottle.template("samostojno2.html", insult = insult)
 
 Word.parse()
