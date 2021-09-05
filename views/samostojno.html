@@ -1,39 +1,98 @@
-<html>
+% rebase("base.html")
 
-    <body>
+<section class="section">
+    <h1 class="title is-1 has-text-centered is-spaced has-text-black">insult generator</h1>
+    <h2 class="subtitle is-3 has-text-centered has-text-black">dodaj svoje pridevnike in samostalnike in personaliziraj svojo žaljivko. ne pozabi za vsako besedo določiti tudi njenega spola: ženski (ž), moški (m) oz. srednji (s) spol.</h2>
+</section>
 
-        <form action="/samostojno" method="POST">
+<section class="section">
+    <form action="/samostojno" method="POST">
+        <div class="columns has-text-centered">
+            <div class="column is-6">
+                <div class="field">
+                    <label class="label"><h1 class="title is-4 has-text-centered is-spaced has-text-black">pridevniki:</h1></label>
+                    <div class="control">
+                        <input class="input is-info" type="text" name="pridevnik" placeholder="npr. nadležna">
+                    </div>
+                </div>
+            </div>
+            <div class="column is-6">
+                <div class="field">
+                    <label class="label"><h1 class="title is-4 has-text-centered is-spaced has-text-black">samostalniki:</h1></label>
+                    <div class="control">
+                        <input class="input is-info" type="text" name="samostalnik" placeholder="npr. pomaranča">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns has-text-centered">
+            <div class="column is-2 is-offset-5">
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" name="spol" value="z">
+                        ž
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="spol" value="m">
+                        m
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="spol" value="s">
+                        s
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="columns has-text-centered">
+            <div class="column is-2 is-offset-4">
+                <div class="field">
+                    <div class="control">
+                        <input class="button is-info is-outlined is-medium" type="submit" name="dodaj" value="dodaj!">
+                    </div>
+                </div>
+            </div>
+            <div class="column is-2">
+                <div class="field">
+                    <div class="control">
+                        <input class="button is-info is-outlined is-medium" type="submit" name="generiraj" value="generiraj">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
 
-            samostalniki: <input type="text" name="samostalnik">
-            pridevniki: <input type="text" name="pridevnik">
-            spol:
-            <input type="radio" name="spol" value="ž"> <label for="ž">ž</label>
-            <input type="radio" name="spol" value="m"> <label for="m">m</label>
-            <input type="radio" name="spol" value="s"> <label for="s">s</label>
-
-            <input type="submit" value="dodaj!">
-            <input type="submit" name="generiraj" value="generiraj">
-
-        </form>
-
-        <h2>Samostalniki:</h2>
-        <ul>
-            % for samostalnik in Noun.nouns:
-                % if samostalnik.difficulty == "custom" and samostalnik.language == "si":
-                <li>{{samostalnik}}</li>
-                % end
-            % end
-        </ul>
-        
-        <h2>Pridevniki:</h2>
-        <ul>
-            % for pridevnik in Adjective.adjectives:
-                % if pridevnik.difficulty == "custom" and pridevnik.language == "si":
-                <li>{{pridevnik}}</li>
-                % end
-            % end
-        </ul>
-
-    </body>
-
-</html>
+<section class="section">
+    <div class="columns">
+        <div class="column is-4 is-offset-1">
+            <div class="content">
+                <article class="message is-info">
+                    <div class="message-body">
+                        <ul>
+                            % for pridevnik in Adjective.adjectives:
+                                % if pridevnik.difficulty == "custom" and pridevnik.language == "si":
+                                <li><p>{{str(pridevnik) + " ("}}{{str(pridevnik.gender) if pridevnik.gender != "z" else "ž"}}{{")"}}</p></li>
+                                % end
+                            % end
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="column is-4 is-offset-2">
+            <div class="content">
+                <article class="message is-info">
+                    <div class="message-body">
+                        <ul>
+                            % for samostalnik in Noun.nouns:
+                                % if samostalnik.difficulty == "custom" and samostalnik.language == "si":
+                                <li><p>{{str(samostalnik) + " ("}}{{str(samostalnik.gender) if samostalnik.gender != "z" else "ž"}}{{")"}}</p></li>
+                                % end
+                            % end
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>

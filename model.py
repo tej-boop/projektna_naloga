@@ -75,8 +75,7 @@ class Insult:
                 adjective = random.choice(long_adjective_list)
             return Insult(adjective, noun)
         elif len(long_noun_list) == 0:
-            gender = random.choice(["f", "m", "t"])
-            return Insult.generate(language, difficulty, gender)
+            return Insult("Not enough", "Data")
 
 if __name__ == "__main__":
     Word.parse()

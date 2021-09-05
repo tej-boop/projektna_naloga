@@ -1,17 +1,25 @@
-<html>
+% rebase("base.html")
 
-    <body>
+<section class="section">
+    <h1 class="title is-1 has-text-centered is-spaced has-text-black">insult generator</h1>
+    <h2 class="subtitle is-3 has-text-centered has-text-black">how much do you want to ruin a person's day with your insult?</h2>
+</section>
 
-        <h2>how much do you want to ruin a person's day with your insult?</h2>
-        <ul>
-            <form action="/en" method="POST">
-                <li><input type ="submit" name="baby" value="baby mode"></li>
-                <li><input type ="submit" name="mean" value="hardcore survival"></li>
-                <li><input type ="submit" name="any" value="no preference"></li>
-                <li><input type ="submit" name="play_god" value="play god"></li>
-            </form> 
-        </ul>
-
-    </body>
-
-</html>
+<section class="section has-text-centered">
+    <form action="/en" method="POST">
+        <div class="columns">
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="baby" value="baby mode">
+            </div>
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="mean" value="hardcore survival">
+            </div>
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="any" value="no preference">
+            </div>
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="play_god" value="play god">
+            </div>
+        </div>
+    </form>
+</section>

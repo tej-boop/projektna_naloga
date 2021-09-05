@@ -1,17 +1,25 @@
-<html>
+%rebase("base.html")
 
-    <body>
+<section class="section">
+    <h1 class="title is-1 has-text-centered is-spaced has-text-black">insult generator</h1>
+    <h2 class="subtitle is-3 has-text-centered has-text-black">kdo je tarča tvojega agresivnega izpada?</h2>
+</section>
 
-        <h2>kdo je tarča tvojega agresivnega izpada?</h2>
-        <ul>
-            <form action="/oporecna" method="POST">
-                <li><input type ="submit" name="ona" value="ona"></li>
-                <li><input type ="submit" name="on" value="on"></li>
-                <li><input type ="submit" name="ono" value="ono"></li>
-                <li><input type ="submit" name="kdorkoli" value="kdorkoli"></li>
-            </form>
-        </ul>
-
-    </body>
-
-</html>
+<section class="section has-text-centered">
+    <form action="/oporecna" method="POST">
+        <div class="columns">
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="ona" value="ona">
+            </div>
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="on" value="on">
+            </div>
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="ono" value="ono">
+            </div>
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="kdorkoli" value="kdorkoli">
+            </div>
+        </div>
+    </form>
+</section>

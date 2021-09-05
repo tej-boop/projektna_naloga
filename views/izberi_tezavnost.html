@@ -1,17 +1,25 @@
-<html>
+% rebase("base.html")
 
-    <body>
+<section class="section">
+    <h1 class="title is-1 has-text-centered is-spaced has-text-black">insult generator</h1>
+    <h2 class="subtitle is-3 has-text-centered has-text-black">kako oporečna želiš, da je tvoja zmerljivka?</h2>
+</section>
 
-        <h2>kako oporečna želiš, da je tvoja zmerljivka?</h2>
-        <ul>
-            <form action="/si" method="POST">
-                <li><input type ="submit" name="nezaljiva" value="otročje nežaljiva"></li>
-                <li><input type ="submit" name="moralno_oporecna" value="brez moralnega kompasa"></li>
-                <li><input type ="submit" name="brez_preference" value="vseeno mi je"></li>
-                <li><input type ="submit" name="samostojno" value="sestavil/-a si jo bom sam/-a"></li>
-            </form> 
-        </ul>
-
-    </body>
-
-</html>
+<section class="section has-text-centered">
+    <form action="/si" method="POST">
+        <div class="columns">
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="nezaljiva" value="otročje nežaljiva">
+            </div>
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="moralno_oporecna" value="brez moralnega kompasa">
+            </div>
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="brez_preference" value="vseeno mi je">
+            </div>
+            <div class="column">
+                <input class="button is-info is-outlined is-medium" type ="submit" name="samostojno" value="sestavil/-a si jo bom sam/-a">
+            </div>
+        </div>
+    </form>
+</section>

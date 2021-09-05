@@ -30,6 +30,8 @@ def choose_difficulty():
     if any is not None:
         return bottle.redirect("/random")
     if play_god is not None:
+        Noun.nouns =[]
+        Adjective.adjectives = []
         return bottle.redirect("/play-god")
     return bottle.template('choose_difficulty.html')
 
@@ -68,14 +70,20 @@ def no_preference():
 def play_god():
     adjectives = bottle.request.POST.getunicode("adjective")
     nouns = bottle.request.POST.getunicode("noun")
-    generate = bottle.request.POST.get("generate")
-    if adjectives is not None:
-        for adj in adjectives.split():
-            Adjective(adj, "en", "custom", "x")
-    if nouns is not None:
-        for n in nouns.split():
-            Noun(n, "en", "custom", "x")
+    generate = bottle.request.POST.getunicode("generate")
+    add = bottle.request.POST.getunicode("add")
+    if add is not None:
+        print("4")
+        if adjectives is not None:
+            print("1")
+            for adj in adjectives.split():
+                Adjective(adj, "en", "custom", "x")
+        if nouns is not None:
+            print("2")
+            for n in nouns.split():
+                Noun(n, "en", "custom", "x")
     if generate is not None:
+        print("3")
         return bottle.redirect("/show-insult")
     return bottle.template("play-god.html", Adjective = Adjective, Noun = Noun)
 
@@ -102,6 +110,8 @@ def izberi_tezavnost():
     if brez_preference is not None:
         return bottle.redirect("/vseeno")
     if samostojno is not None:
+        Noun.nouns =[]
+        Adjective.adjectives = []
         return bottle.redirect("/samostojno")
     return bottle.template('izberi_tezavnost.html')
 
@@ -301,8 +311,9 @@ def samostojno():
 @bottle.get("/prikazi-insult")
 @bottle.post("/prikazi-insult")
 def prikazi_insult():
-    genders = ["f", "m", "t"]
+    genders = ["z", "m", "s"]
     gender = random.choice(genders)
+    print("5 " + str(gender))
     insult = Insult.generate("si", "custom", gender)
     refresh = bottle.request.POST.get("refresh")
     if refresh is not None:

@@ -1,34 +1,80 @@
-<html>
+% rebase("base.html")
 
-    <body>
+<section class="section">
+    <h1 class="title is-1 has-text-centered is-spaced has-text-black">insult generator</h1>
+    <h2 class="subtitle is-3 has-text-centered has-text-black">add your own adjectives and nouns and let a random insult generate.</h2>
+</section>
 
-        <form action="/play-god" method="POST">
+<section class="section">
+    <form action="/play-god" method="POST">
+        <div class="columns has-text-centered">
+            <div class="column is-6">
+                <div class="field">
+                    <label class="label"><h1 class="title is-4 has-text-centered is-spaced has-text-black">adjectives:</h1></label>
+                    <div class="control">
+                        <input class="input is-info" type="text" name="adjective" placeholder="e.g. annoying">
+                    </div>
+                </div>
+            </div>
+            <div class="column is-6">
+                <div class="field">
+                    <label class="label"><h1 class="title is-4 has-text-centered is-spaced has-text-black">nouns:</h1></label>
+                    <div class="control">
+                        <input class="input is-info" type="text" name="noun" placeholder="e.g. orange">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns has-text-centered">
+            <div class="column is-2 is-offset-4">
+                <div class="field">
+                    <div class="control">
+                        <input class="button is-info is-outlined is-medium" type="submit" name="add" value="add!">
+                    </div>
+                </div>
+            </div>
+            <div class="column is-2">
+                <div class="field">
+                    <div class="control">
+                        <input class="button is-info is-outlined is-medium" type="submit" name="generate" value="generate">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
 
-            adjectives: <input type="text" name="adjective">
-            nouns: <input type="text" name="noun">
-            <input type="submit" value="add!">
-            <input type="submit" name="generate" value="generate">
-
-        </form>
-
-        <h2>Adjectives:</h2>
-        <ul>
-            % for adjective in Adjective.adjectives:
-                % if adjective.difficulty == "custom" and adjective.language == "en":
-                <li>{{adjective}}</li>
-                % end
-            % end
-        </ul>
-        
-        <h2>Nouns:</h2>
-        <ul>
-            % for noun in Noun.nouns:
-                % if noun.difficulty == "custom" and noun.language == "en":
-                <li>{{noun}}</li>
-                % end
-            % end
-        </ul>
-
-    </body>
-
-</html>
+<section class="section">
+    <div class="columns">
+        <div class="column is-4 is-offset-1">
+            <div class="content">
+                <article class="message is-info">
+                    <div class="message-body">
+                        <ul>
+                            % for adjective in Adjective.adjectives:
+                                % if adjective.difficulty == "custom" and adjective.language == "en":
+                                <li><p>{{adjective}}</p></li>
+                                % end
+                            % end
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="column is-4 is-offset-2">
+            <div class="content">
+                <article class="message is-info">
+                    <div class="message-body">
+                        <ul>
+                            % for noun in Noun.nouns:
+                                % if noun.difficulty == "custom" and noun.language == "en":
+                                <li><p>{{noun}}</p></li>
+                                % end
+                            % end
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>

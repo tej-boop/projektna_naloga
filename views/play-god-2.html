@@ -1,6 +1,27 @@
-<h3>here is your insult:</h3>
-<h2>{{insult}}</h2>
+% rebase("base.html")
 
-<form action="/show-insult" method="POST">
-    <input type="submit" name="refresh" value="refresh">
-</form>
+<section class="section">
+    <h1 class="title is-1 has-text-centered is-spaced has-text-black">insult generator</h1>
+    <h2 class="subtitle is-3 has-text-centered has-text-black">here is your insult:</h2>
+</section>
+
+<section class="section">
+    <div class="columns">
+        <div class="column is-6 is-offset-3">
+            <p class="title is-3 has-text-centered has-text-black is-uppercase">{{insult}}</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <form action="/show-insult" method="POST">
+        <div class="columns">
+            <div class="column is-2 is-offset-4 has-text-centered">
+                <input class="button is-info is-outlined is-medium" type="submit" name="refresh" value="give me another insult">
+            </div>
+            <div class="column is-2 has-text-centered">
+                <input class="button is-info is-outlined is-medium" type="submit" name="favourite" value="add to favourites">
+            </div>
+        </div>
+    </form>
+</section>
