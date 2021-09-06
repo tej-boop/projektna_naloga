@@ -56,6 +56,8 @@ class Insult:
         self.favourited = False
 
     def __str__(self):
+        if type(self.noun) == str:
+            return f"{self.adjective} {self.noun}"
         if self.noun.language == "en":
             return f"{self.adjective} {self.noun}"
         if self.noun.language == "si":
@@ -72,9 +74,8 @@ class Insult:
             long_adjective_list = [x for x in Adjective.adjectives if language == x.language and difficulty == x.difficulty and gender == x.gender and gender == noun.gender]
             if len(long_adjective_list) != 0:
                 adjective = random.choice(long_adjective_list)
-            return Insult(adjective, noun)
-        elif len(long_noun_list) == 0:
-            return Insult("Not enough", "Data")
+                return Insult(adjective, noun)
+        return Insult("Not enough", "Data")
 
 if __name__ == "__main__":
     Word.parse()
