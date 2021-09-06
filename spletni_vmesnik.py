@@ -16,6 +16,7 @@ def osnovna_stran():
     else:
         data = str(datetime.now())
         cookie = base64.b64encode(data.encode("utf-8"))
+        cookie = str(cookie, "utf-8")
         bottle.response.set_cookie("user", cookie)
     if cookie in favourites.keys():
         pass
@@ -37,12 +38,16 @@ def favourited_insults():
     else:
         data = str(datetime.now())
         cookie = base64.b64encode(data.encode("utf-8"))
+        cookie = str(cookie, "utf-8")
         bottle.response.set_cookie("user", cookie)
     if cookie in favourites.keys():
         pass
     else:
         favourites[cookie] = [None, []]
-    remove = bottle.request.POST.get("remove")
+    for i in range(len(favourites[cookie][1])):
+        remove = bottle.request.POST.get(str(i))
+        if remove is not None:
+            favourites[cookie][1].pop(i)
     favourites_list = favourites[cookie][1]
     return bottle.template("favourites.html", favourites_list = list(enumerate(favourites_list)))
 
@@ -54,6 +59,7 @@ def choose_difficulty():
     else:
         data = str(datetime.now())
         cookie = base64.b64encode(data.encode("utf-8"))
+        cookie = str(cookie, "utf-8")
         bottle.response.set_cookie("user", cookie)
     if cookie in favourites.keys():
         pass
@@ -93,7 +99,8 @@ def baby_mode():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         insult = Insult.generate("en", "baby", "x")
         favourites[cookie][0] = insult
@@ -119,7 +126,8 @@ def hardcore_survival():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         insult = Insult.generate("en", "hardcore", "x")
         favourites[cookie][0] = insult
@@ -145,7 +153,8 @@ def no_preference():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         difficulties = ["baby", "hardcore"]
         diff = random.choice(difficulties)
@@ -202,7 +211,8 @@ def show_insult():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         insult = Insult.generate("en", "custom", "x")
         favourites[cookie][0] = insult
@@ -286,7 +296,8 @@ def nezaljiva_f():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         insult = Insult.generate("si", "baby", "f")
         favourites[cookie][0] = insult
@@ -312,7 +323,8 @@ def nezaljiva_m():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         insult = Insult.generate("si", "baby", "m")
         favourites[cookie][0] = insult
@@ -338,7 +350,8 @@ def nezaljiva_t():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         insult = Insult.generate("si", "baby", "t")
         favourites[cookie][0] = insult
@@ -364,7 +377,8 @@ def nezaljiva_fmt():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         genders = ["f", "m", "t"]
         y = random.choice(genders)
@@ -420,7 +434,8 @@ def oporecna_f():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         insult = Insult.generate("si", "hardcore", "f")
         favourites[cookie][0] = insult
@@ -446,7 +461,8 @@ def oporecna_m():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         insult = Insult.generate("si", "hardcore", "m")
         favourites[cookie][0] = insult
@@ -472,7 +488,8 @@ def oporecna_t():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         insult = Insult.generate("si", "hardcore", "t")
         favourites[cookie][0] = insult
@@ -498,7 +515,8 @@ def oporecna_fmt():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         genders = ["f", "m", "t"]
         y = random.choice(genders)
@@ -555,7 +573,8 @@ def vseeno_f():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         difficulties = ["baby", "hardcore"]
         diff = random.choice(difficulties)
@@ -583,7 +602,8 @@ def vseeno_m():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         difficulties = ["baby", "hardcore"]
         diff = random.choice(difficulties)
@@ -611,7 +631,8 @@ def vseeno_t():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         difficulties = ["baby", "hardcore"]
         diff = random.choice(difficulties)
@@ -639,7 +660,8 @@ def vseeno_fmt():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         difficulties = ["baby", "hardcore"]
         diff = random.choice(difficulties)
@@ -699,7 +721,8 @@ def prikazi_insult():
     favourite = bottle.request.POST.get("favourite")
     if favourite is not None:
         insult = favourites[cookie][0]
-        favourites[cookie][1].append(insult)
+        if insult not in favourites[cookie][1]:
+            favourites[cookie][1].append(insult)
     else:
         genders = ["z", "m", "s"]
         gender = random.choice(genders)

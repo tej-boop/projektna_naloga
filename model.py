@@ -32,7 +32,6 @@ class Word:
     def parse():
         for file in glob.glob("projektna_naloga/besede/*.txt"):
             Word.load_from_file(file)
-            #print(file)
 
 class Noun(Word):
     nouns = []
